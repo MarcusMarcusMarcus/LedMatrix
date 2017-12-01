@@ -1,6 +1,7 @@
 #include <QDateTime>
 #include <QPainter>
 #include "LedDevice.h"
+#include "AnimatedValue.h"
 
 #include <QBrush>
 
@@ -59,8 +60,8 @@ void test1(QPainter &painter,int width,int height)
 
 void test2(QPainter &painter,int width,int height)
 {
-    static int offset = 1;
-    offset++;
+    static AnimatedValue offset(0,22,3);
+    static AnimatedValue focal(0,22,5);
     QRadialGradient gradient(11,11,22);
     gradient.setColorAt(0,QColor(Qt::red));
     gradient.setColorAt(.25,QColor(Qt::yellow));
@@ -68,8 +69,8 @@ void test2(QPainter &painter,int width,int height)
     gradient.setColorAt(.75,QColor(Qt::blue));
     gradient.setColorAt(1,QColor(Qt::red));
     gradient.setSpread(QGradient::RepeatSpread);
-    gradient.setRadius(offset);
-    gradient.setFocalPoint(1,1);
+    gradient.setRadius(offset.value());
+    gradient.setFocalPoint(focal.value(),focal.value());
 //    gradient.setCenterRadius(offset);
     QBrush brush(gradient);
     painter.setBrush(brush);

@@ -29,14 +29,16 @@ SOURCES += \
     LedMatrix.cpp \
     LedDevice.cpp \
     Ws2811Device.cpp \
-    GuiDevice.cpp
+    GuiDevice.cpp \
+    AnimatedValue.cpp
 
 HEADERS += \
         MainWindow.h \
     LedMatrix.h \
     LedDevice.h \
     Ws2811Device.h \
-    GuiDevice.h
+    GuiDevice.h \
+    AnimatedValue.h
 
 FORMS += \
         MainWindow.ui
