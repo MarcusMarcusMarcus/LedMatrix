@@ -60,7 +60,7 @@ void test1(QPainter &painter,int width,int height)
 
 void test2(QPainter &painter,int width,int height)
 {
-    static AnimatedValue offset(0,22,3);
+    static AnimatedValue offset({0,0,20,22},3);
     static AnimatedValue focal(0,22,5);
     QRadialGradient gradient(11,11,22);
     gradient.setColorAt(0,QColor(Qt::red));

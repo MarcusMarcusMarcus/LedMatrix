@@ -6,14 +6,15 @@ class AnimatedValue
 {
 public:
     AnimatedValue(float from,float to,float seconds);
+    AnimatedValue(const QList<float> &values,float seconds);
+
+    void setTimeRange(float begin,float end);
 
     float value();
 private:
-    float m_from;
-    float m_to;
-    float m_seconds;
-    float m_start;
-    float m_stop;
+    float m_beginTime;
+    float m_endTime;
+    QList<float> m_values;
     QDateTime m_startTime;
     QGradient::Spread m_spread;
 };
