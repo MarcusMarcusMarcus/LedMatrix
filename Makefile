@@ -2,7 +2,8 @@ HEADERS = LedMatrix.h MainWindow.h
 UI_FILES = MainWindow.ui
 MOC_HEADERS = MainWindow.h
 SOURCES = LedMatrix.cpp MainWindow.cpp main.cpp \
-          GuiDevice.cpp LedDevice.cpp Ws2811Device.cpp
+          GuiDevice.cpp LedDevice.cpp Ws2811Device.cpp \
+          AnimatedValue.cpp
 
 LIBS = -Lws2811 -lws2811 \
        -L/usr/lib/arm-linux-gnueabihf \
