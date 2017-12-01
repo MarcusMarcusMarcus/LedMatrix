@@ -44,11 +44,11 @@ void test1(QPainter &painter,int width,int height)
     static int offset = 1;
     offset++;
     QLinearGradient gradient;
-    gradient.setColorAt(0,QColor(Qt::red));
-    gradient.setColorAt(.25,QColor(Qt::yellow));
-    gradient.setColorAt(.5,QColor(Qt::green));
-    gradient.setColorAt(.75,QColor(Qt::blue));
-    gradient.setColorAt(1,QColor(Qt::red));
+    gradient.setColorAt(0,QColor(qRgb(63,0,0)));
+    gradient.setColorAt(.25,QColor(qRgb(63,63,0)));
+    gradient.setColorAt(.5,QColor(qRgb(0,63,0)));
+    gradient.setColorAt(.75,QColor(qRgb(0,0,63)));
+    gradient.setColorAt(1,QColor(qRgb(63,0,0)));
     gradient.setSpread(QGradient::RepeatSpread);
     gradient.setStart(0+offset,0+offset);
     gradient.setFinalStop(122+offset,122+offset);
@@ -60,29 +60,46 @@ void test1(QPainter &painter,int width,int height)
 
 void test2(QPainter &painter,int width,int height)
 {
-    static AnimatedValue offset({0,0,20,22},3);
+  static AnimatedValue offset({10,33},10);
     static AnimatedValue focal(0,22,5);
     QRadialGradient gradient(11,11,22);
+#if 0
     gradient.setColorAt(0,QColor(Qt::red));
     gradient.setColorAt(.25,QColor(Qt::yellow));
     gradient.setColorAt(.5,QColor(Qt::green));
     gradient.setColorAt(.75,QColor(Qt::blue));
     gradient.setColorAt(1,QColor(Qt::red));
+#else
+    gradient.setColorAt(0,QColor(qRgb(31,0,0)));
+    gradient.setColorAt(.25,QColor(qRgb(31,31,0)));
+    gradient.setColorAt(.5,QColor(qRgb(0,31,0)));
+    gradient.setColorAt(.75,QColor(qRgb(0,0,31)));
+    gradient.setColorAt(1,QColor(qRgb(31,0,0)));
+#endif
     gradient.setSpread(QGradient::RepeatSpread);
     gradient.setRadius(offset.value());
     gradient.setFocalPoint(focal.value(),focal.value());
-//    gradient.setCenterRadius(offset);
+    //    gradient.setCenterRadius(offset.value());
     QBrush brush(gradient);
     painter.setBrush(brush);
     painter.fillRect(0,0,width,height,gradient);
     painter.end();
 }
 
+void test3(QPainter &painter,int width,int height)
+{
+  painter.setPen(QPen(Qt::red));
+  painter.drawLine(0,0,5,5);
+}
+
 void LedDevice::update()
 {
+  matrix().image().fill(Qt::black);
     QPainter painter(&matrix().image());
+   
+    
     test2(painter,width(),height());
 
-    printf("%s\n",QDateTime::currentDateTime().toString().toUtf8().constData());
+    //    printf("%s\n",QDateTime::currentDateTime().toString().toUtf8().constData());
     paint();
 }

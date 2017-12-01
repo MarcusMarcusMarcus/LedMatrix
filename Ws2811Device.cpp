@@ -27,9 +27,30 @@ Ws2811Device::~Ws2811Device()
 void Ws2811Device::paint()
 {
 #ifndef WIN32
+    for(int x=0;x<width();++x)
+    {
+      for(int y=0;y<height();++y)
+      {
+	if (y&1) 
+  	  s_leds->channel[0].leds[y * width() + x] = matrix().pixel()[y * width() + x];
+	else
+  	  s_leds->channel[0].leds[y * width() + x] = matrix().pixel()[y * width() + width()-x-1];
+      }
+    }
+#if 0	
+      for(int x=0;x<width();++x)
+         matrix[y * width + x] = matrix[(y + 1)*width + width - x - 1];
+
+  
     int count = width()*height();
-    for(int i=0;i<count;++i)
-        s_leds->channel[0].leds[i] = matrix().pixel()[i];
+    //    for(int i=0;i<s_leds->channel[0].count;++i)
+    //      s_leds->channel[0].leds[i] = matrix().pixel()[i];
+    s_leds->channel[0].leds[0]  = 0x00001f;
+    s_leds->channel[0].leds[21] = 0x00001f;
+    s_leds->channel[0].leds[22] = 0x00001f;
+    #endif
+    //    s_leds->channel[0].leds[22]  = 0x00ffff;
+    //    s_leds->channel[0].leds[27] = 0x00ffff;
     ws2811_render(s_leds.get());
 #endif
 }
@@ -41,12 +62,12 @@ void Ws2811Device::start(int width,int height)
     s_leds.reset(new ws2811_t());
     memset(s_leds.get(),0,sizeof(ws2811_t));
     s_leds->freq = WS2811_TARGET_FREQ;
-    s_leds->dmanum = 5;
+    s_leds->dmanum = 10;
     s_leds->channel[0].gpionum = 18;
     s_leds->channel[0].count = width*height;
     s_leds->channel[0].invert = 0;
-    s_leds->channel[0].brightness = 255;
-    s_leds->channel[0].strip_type = WS2811_STRIP_RGB;
+    s_leds->channel[0].brightness = 64;
+    s_leds->channel[0].strip_type = WS2811_STRIP_GBR;
     s_leds->channel[1].gpionum = 0;
     s_leds->channel[1].count = 0;
     s_leds->channel[1].invert = 0;

@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
 
     device->paint();
-    device->start(0.1);
+    device->start(0.05);
     application.exec();
     return 0;
 }
