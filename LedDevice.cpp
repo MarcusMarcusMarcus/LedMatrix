@@ -90,13 +90,19 @@ void test3(QPainter &painter,int width,int height)
 {
     static AnimatedPoint point1({0,0},{22,22},1,.5);
     static AnimatedPoint point2({0,0},{22,22},.4,.9);
-    static AnimatedPoint point3({0,0},{22,22},.7,.4);
+    static AnimatedPoint point3({0,0},{22,22},.7,.62324);
+
+    QRadialGradient g1(.5,.5,.5,.6,.4);
+    g1.setColorAt(0,QColor(QColor(255,255,0,127)));
+    g1.setColorAt(.1,QColor(QColor(255,255,0,127)));
+    g1.setColorAt(1,QColor(QColor(32,32,0,127)));
+    g1.setCoordinateMode(QGradient::ObjectBoundingMode);
     painter.setPen(Qt::NoPen);
     painter.setBrush(QBrush(QColor(255,0,0,32)));
     painter.drawEllipse(point1.value(),5,5);
     painter.setBrush(QBrush(QColor(255,127,0,32)));
     painter.drawEllipse(point2.value(),3,3);
-    painter.setBrush(QBrush(QColor(0,0,255,32)));
+    painter.setBrush(QBrush(g1));
     painter.drawEllipse(point3.value(),7,7);
     painter.end();
 }
