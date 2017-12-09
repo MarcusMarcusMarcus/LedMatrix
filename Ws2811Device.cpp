@@ -66,8 +66,9 @@ void Ws2811Device::start(int width,int height)
     s_leds->channel[0].gpionum = 18;
     s_leds->channel[0].count = width*height;
     s_leds->channel[0].invert = 0;
-    s_leds->channel[0].brightness = 64;
-    s_leds->channel[0].strip_type = WS2811_STRIP_GBR;
+    s_leds->channel[0].brightness = 16;
+    s_leds->channel[0].strip_type = WS2811_STRIP_GRB;
+    //    s_leds->channel[0].strip_type = WS2811_STRIP_RGB;
     s_leds->channel[1].gpionum = 0;
     s_leds->channel[1].count = 0;
     s_leds->channel[1].invert = 0;

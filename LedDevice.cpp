@@ -92,11 +92,11 @@ void test3(QPainter &painter,int width,int height)
     static AnimatedPoint point2({0,0},{22,22},.4,.9);
     static AnimatedPoint point3({0,0},{22,22},.7,.4);
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QBrush(QColor(255,0,0,127)));
+    painter.setBrush(QBrush(QColor(255,0,0,32)));
     painter.drawEllipse(point1.value(),5,5);
-    painter.setBrush(QBrush(QColor(255,127,0,127)));
+    painter.setBrush(QBrush(QColor(255,127,0,32)));
     painter.drawEllipse(point2.value(),3,3);
-    painter.setBrush(QBrush(QColor(255,255,0,127)));
+    painter.setBrush(QBrush(QColor(0,0,255,32)));
     painter.drawEllipse(point3.value(),7,7);
     painter.end();
 }
