@@ -30,7 +30,8 @@ SOURCES += \
     LedDevice.cpp \
     Ws2811Device.cpp \
     GuiDevice.cpp \
-    AnimatedValue.cpp
+    AnimatedValue.cpp \
+    AnimatedPoint.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -38,7 +39,15 @@ HEADERS += \
     LedDevice.h \
     Ws2811Device.h \
     GuiDevice.h \
-    AnimatedValue.h
+    AnimatedValue.h \
+    AnimatedPoint.h
 
 FORMS += \
         MainWindow.ui
+
+unix:!macx: LIBS += -L$$PWD/ws2811/ -lws2811
+
+INCLUDEPATH += $$PWD/ws2811
+DEPENDPATH += $$PWD/ws2811
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/ws2811/libws2811.a

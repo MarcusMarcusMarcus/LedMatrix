@@ -2,7 +2,7 @@
 #include <QPainter>
 #include "LedDevice.h"
 #include "AnimatedValue.h"
-
+#include "AnimatedPoint.h"
 #include <QBrush>
 
 LedDevice::LedDevice(int width, int height) :
@@ -60,8 +60,8 @@ void test1(QPainter &painter,int width,int height)
 
 void test2(QPainter &painter,int width,int height)
 {
-  static AnimatedValue offset({10,33},10);
-    static AnimatedValue focal(0,22,5);
+    static AnimatedFloat offset({10.0,33.0},10);
+    static AnimatedFloat focal(0,22,5);
     QRadialGradient gradient(11,11,22);
 #if 0
     gradient.setColorAt(0,QColor(Qt::red));
@@ -88,17 +88,27 @@ void test2(QPainter &painter,int width,int height)
 
 void test3(QPainter &painter,int width,int height)
 {
-  painter.setPen(QPen(Qt::red));
-  painter.drawLine(0,0,5,5);
+    static AnimatedPoint point1({0,0},{22,22},1,.5);
+    static AnimatedPoint point2({0,0},{22,22},.4,.9);
+    static AnimatedPoint point3({0,0},{22,22},.7,.4);
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QBrush(QColor(255,0,0,127)));
+    painter.drawEllipse(point1.value(),5,5);
+    painter.setBrush(QBrush(QColor(255,127,0,127)));
+    painter.drawEllipse(point2.value(),3,3);
+    painter.setBrush(QBrush(QColor(255,255,0,127)));
+    painter.drawEllipse(point3.value(),7,7);
+    painter.end();
 }
 
 void LedDevice::update()
 {
   matrix().image().fill(Qt::black);
     QPainter painter(&matrix().image());
+  //  painter.setCompositionMode(QPainter::CompositionMode_Plus);
    
     
-    test2(painter,width(),height());
+    test3(painter,width(),height());
 
     //    printf("%s\n",QDateTime::currentDateTime().toString().toUtf8().constData());
     paint();
