@@ -31,7 +31,9 @@ SOURCES += \
     Ws2811Device.cpp \
     GuiDevice.cpp \
     AnimatedValue.cpp \
-    AnimatedPoint.cpp
+    AnimatedPoint.cpp \
+    Shape.cpp \
+    Ball.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -40,7 +42,9 @@ HEADERS += \
     Ws2811Device.h \
     GuiDevice.h \
     AnimatedValue.h \
-    AnimatedPoint.h
+    AnimatedPoint.h \
+    Shape.h \
+    Ball.h
 
 FORMS += \
         MainWindow.ui
