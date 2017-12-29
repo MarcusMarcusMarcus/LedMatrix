@@ -89,9 +89,9 @@ void test2(QPainter &painter,int width,int height)
 
 void test3(QPainter &painter,int width,int height)
 {
-    static AnimatedPoint point1({0,0},{22,22},11,1.5);
-    static AnimatedPoint point2({0,0},{22,22},1.4,1.9);
-    static AnimatedPoint point3({0,0},{22,22},.7,.62324);
+    static AnimatedPoint point1({0,0},{width,height},11,1.5);
+    static AnimatedPoint point2({0,0},{width,height},1.4,1.9);
+    static AnimatedPoint point3({0,0},{width,height},.7,.62324);
 
     Ball ball1;
     ball1.setColor(Qt::red);
@@ -108,7 +108,7 @@ void test3(QPainter &painter,int width,int height)
 
 void LedDevice::update()
 {
-  matrix().image().fill(Qt::black);
+    matrix().image().fill(Qt::black);
     QPainter painter(&matrix().image());
     painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
   //  painter.setCompositionMode(QPainter::CompositionMode_Plus);
