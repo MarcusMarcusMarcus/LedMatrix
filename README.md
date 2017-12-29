@@ -8,10 +8,17 @@ scons
 
 ## Running
 
+on the LED matrix, use `-d ws2811`
 ```bash
-sudo ./Ball -platform linuxfb:fb=/dev/fb0 -d x
+sudo ./Ball -platform linuxfb:fb=/dev/fb0 -d ws2811
 ```
 
+on a framebuffer device (Raspberries without X installation)
 ```bash
-sudo ./Ball -platform linuxfb:fb=/dev/fb0 -d x
+./Ball -platform linuxfb:fb=/dev/fb0 -W 600 -H 400
+```
+
+In an X window
+```
+./Ball -W 600 -H 400
 ```
