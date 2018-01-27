@@ -29,13 +29,13 @@ void Ws2811Device::paint()
 #ifndef WIN32
     for(int x=0;x<width();++x)
     {
-      for(int y=0;y<height();++y)
-      {
-	if (y&1) 
-  	  s_leds->channel[0].leds[y * width() + x] = matrix().pixel()[y * width() + x];
-	else
-  	  s_leds->channel[0].leds[y * width() + x] = matrix().pixel()[y * width() + width()-x-1];
-      }
+        for(int y=0;y<height();++y)
+        {
+            if (y&1)
+                s_leds->channel[0].leds[y * width() + x] = matrix().pixel()[y * width() + width()-x-1];
+            else
+                s_leds->channel[0].leds[y * width() + x] = matrix().pixel()[y * width() + x];
+        }
     }
 #if 0	
       for(int x=0;x<width();++x)
