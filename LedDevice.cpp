@@ -5,6 +5,7 @@
 #include "AnimatedValue.h"
 #include "AnimatedPoint.h"
 #include "Ball.h"
+#include "Clock.h"
 
 LedDevice::LedDevice(int width, int height) :
     m_matrix(width,height),
@@ -106,6 +107,12 @@ void test3(QPainter &painter,int width,int height)
     painter.end();
 }
 
+void test4(QPainter &painter,int width,int height)
+{
+    static Clock clock;
+    clock.paint(painter);
+}
+
 void LedDevice::update()
 {
   matrix().image().fill(Qt::black);
@@ -114,7 +121,7 @@ void LedDevice::update()
   //  painter.setCompositionMode(QPainter::CompositionMode_Plus);
    
     
-    test3(painter,width(),height());
+    test4(painter,width(),height());
 
     //    printf("%s\n",QDateTime::currentDateTime().toString().toUtf8().constData());
     paint();

@@ -33,7 +33,9 @@ SOURCES += \
     AnimatedValue.cpp \
     AnimatedPoint.cpp \
     Shape.cpp \
-    Ball.cpp
+    Ball.cpp \
+    Effect.cpp \
+    Clock.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -44,7 +46,9 @@ HEADERS += \
     AnimatedValue.h \
     AnimatedPoint.h \
     Shape.h \
-    Ball.h
+    Ball.h \
+    Effect.h \
+    Clock.h
 
 FORMS += \
         MainWindow.ui
