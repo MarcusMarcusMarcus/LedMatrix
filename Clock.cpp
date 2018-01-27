@@ -48,18 +48,18 @@ void Clock::paint(QPainter &painter)
     painter.drawArc(QRect(5,5,x*2-10,y*2-10),90*16,-360*16*s);
     */
 
-    pen.setWidth(2.5);
+    pen.setWidthF(2.5);
     pen.setColor(QColor::fromRgb(64,255,0));
     painter.setPen(pen);
     painter.drawLine(QPointF(x,y),QPointF(cos(h)*hr+x,sin(h)*hr+y));
 
     pen.setColor(QColor::fromRgb(32,127,0));
-    pen.setWidth(2);
+    pen.setWidthF(1.5);
     painter.setPen(pen);
     painter.drawLine(QPointF(x,y),QPointF(cos(m)*mr+x,sin(m)*mr+y));
 
     pen.setColor(QColor::fromRgb(64,64,255));
-    pen.setWidth(2);
+    pen.setWidthF(2);
     painter.setPen(pen);
     painter.drawPoint(QPointF(cos(s)*sr+x,sin(s)*sr+y));
 /*
