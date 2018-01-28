@@ -4,7 +4,7 @@
 class Clock : public Effect
 {
 public:
-    Clock();
+    Clock(QObject *parent);
     void paint(QPainter &painter) override;
 
 };

@@ -5,9 +5,9 @@
 
 #include "Clock.h"
 
-Clock::Clock()
+Clock::Clock(QObject *parent) :
+    Effect(parent)
 {
-
 }
 
 void Clock::paint(QPainter &painter)
@@ -24,7 +24,6 @@ void Clock::paint(QPainter &painter)
     float mr = r * .8;
     float sr = r * .8;
 
-    painter.setRenderHints(QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform|QPainter::Antialiasing);
     QPen pen;
     pen.setWidth(2);
     pen.setCapStyle(Qt::RoundCap);

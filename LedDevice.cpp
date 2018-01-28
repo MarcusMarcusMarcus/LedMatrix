@@ -12,6 +12,13 @@ LedDevice::LedDevice(int width, int height) :
     m_width(width),
     m_height(height)
 {
+    m_effects["clock"] = new Clock(this);
+    for(auto name : m_effects.keys())
+    {
+        auto value = scriptEngine().newQObject(m_effects[name]);
+        scriptEngine().globalObject().setProperty(name, value);
+    }
+    m_effects["clock"]->setEnabled(true);
 }
 
 LedDevice::~LedDevice()
@@ -109,20 +116,27 @@ void test3(QPainter &painter,int width,int height)
 
 void test4(QPainter &painter,int width,int height)
 {
-    static Clock clock;
-    clock.paint(painter);
+//    static Clock clock;
+//    clock.paint(painter);
 }
 
 void LedDevice::update()
 {
-  matrix().image().fill(Qt::black);
+    matrix().image().fill(Qt::black);
     QPainter painter(&matrix().image());
     painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-  //  painter.setCompositionMode(QPainter::CompositionMode_Plus);
-   
-    
-    test4(painter,width(),height());
+    painter.setRenderHints(QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform|QPainter::Antialiasing);
+    for(auto effect : m_effects)
+        if (effect->isEnabled())
+            effect->paint(painter);
 
-    //    printf("%s\n",QDateTime::currentDateTime().toString().toUtf8().constData());
+    //  painter.setCompositionMode(QPainter::CompositionMode_Plus);
+    //  test4(painter,width(),height());
+    //  printf("%s\n",QDateTime::currentDateTime().toString().toUtf8().constData());
     paint();
+}
+
+QScriptEngine &LedDevice::scriptEngine()
+{
+    return m_scriptEngine;
 }
