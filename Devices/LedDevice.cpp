@@ -6,6 +6,8 @@
 #include "AnimatedPoint.h"
 #include "Ball.h"
 #include "Clock.h"
+#include "Balls.h"
+#include "Snakes.h"
 
 LedDevice::LedDevice(int width, int height) :
     m_matrix(width,height),
@@ -13,12 +15,16 @@ LedDevice::LedDevice(int width, int height) :
     m_height(height)
 {
     m_effects["clock"] = new Clock(this);
+    m_effects["balls"] = new Balls(this);
+    m_effects["snakes"] = new Snakes(this);
     for(auto name : m_effects.keys())
     {
         auto value = scriptEngine().newQObject(m_effects[name]);
         scriptEngine().globalObject().setProperty(name, value);
     }
     m_effects["clock"]->setEnabled(true);
+    m_effects["balls"]->setEnabled(false);
+    m_effects["snakes"]->setEnabled(false);
 }
 
 LedDevice::~LedDevice()

@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = LedMatrix
 TEMPLATE = app
+INCLUDEPATH += Base Shapes Effects Animations Devices
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -25,34 +26,40 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        MainWindow.cpp \
-    LedMatrix.cpp \
-    LedDevice.cpp \
-    Ws2811Device.cpp \
-    GuiDevice.cpp \
-    AnimatedValue.cpp \
-    AnimatedPoint.cpp \
-    Shape.cpp \
-    Ball.cpp \
-    Effect.cpp \
-    Clock.cpp
+    Shapes/Ball.cpp \
+    Shapes/Shape.cpp \
+    Devices/GuiDevice.cpp \
+    Devices/LedDevice.cpp \
+    Devices/Ws2811Device.cpp \
+    Effects/Effect.cpp \
+    Animations/AnimatedPoint.cpp \
+    Animations/AnimatedValue.cpp \
+    Effects/Clock.cpp \
+    Base/LedMatrix.cpp \
+    Base/main.cpp \
+    Base/MainWindow.cpp \
+    Effects/Balls.cpp \
+    Base/Random.cpp \
+    Effects/Snakes.cpp
 
 HEADERS += \
-        MainWindow.h \
-    LedMatrix.h \
-    LedDevice.h \
-    Ws2811Device.h \
-    GuiDevice.h \
-    AnimatedValue.h \
-    AnimatedPoint.h \
-    Shape.h \
-    Ball.h \
-    Effect.h \
-    Clock.h
+    Shapes/Ball.h \
+    Shapes/Shape.h \
+    Devices/GuiDevice.h \
+    Devices/LedDevice.h \
+    Devices/Ws2811Device.h \
+    Effects/Effect.h \
+    Animations/AnimatedPoint.h \
+    Animations/AnimatedValue.h \
+    Effects/Clock.h \
+    Base/LedMatrix.h \
+    Base/MainWindow.h \
+    Effects/Balls.h \
+    Base/Random.h \
+    Effects/Snakes.h
 
 FORMS += \
-        MainWindow.ui
+    Base/MainWindow.ui
 
 unix:!macx: LIBS += -L$$PWD/ws2811/ -lws2811
 
