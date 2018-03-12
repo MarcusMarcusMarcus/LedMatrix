@@ -14,10 +14,12 @@ public:
         m_startTime(QDateTime::currentDateTime()),
         m_spread(QGradient::RepeatSpread)
     {
+        if (m_endTime <= m_beginTime)
+            m_endTime = m_beginTime+1;
     }
-    AnimatedValue(const ValueT &from,
-                  const ValueT &to,
-                  float seconds) :
+    AnimatedValue(const ValueT &from = ValueT(),
+                  const ValueT &to = ValueT(),
+                  float seconds = 1) :
         AnimatedValue({from,to},seconds)
     {
     }
@@ -87,6 +89,14 @@ public:
     using AnimatedValue::AnimatedValue;
 protected:
     float interpolate(const float &a,const float &b,float fraction) override;
+};
+
+class AnimatedInt : public AnimatedValue<int>
+{
+public:
+    using AnimatedValue::AnimatedValue;
+protected:
+    int interpolate(const int &a,const int &b,float fraction) override;
 };
 
 class AnimatedColor : public AnimatedValue<QColor>

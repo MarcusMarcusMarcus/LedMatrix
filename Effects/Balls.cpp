@@ -1,8 +1,8 @@
 #include "Random.h"
 #include "Balls.h"
 
-Balls::Balls(QObject *parent) :
-    Effect(parent)
+Balls::Balls(QObject *parent, int width, int height) :
+    Effect(parent,width,height)
 {
     setCount(5);
 }

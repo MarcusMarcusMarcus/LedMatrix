@@ -5,13 +5,14 @@
 
 #include "Clock.h"
 
-Clock::Clock(QObject *parent) :
-    Effect(parent)
+Clock::Clock(QObject *parent, int width, int height) :
+    Effect(parent,width,height)
 {
 }
 
 void Clock::paint(QPainter &painter)
 {
+    painter.eraseRect(0,0,width(),height());
     auto time = QDateTime::currentDateTime().time();
 
     auto h = M_PI * (-.5 + 2*fmod(time.msecsSinceStartOfDay() / float(1000*60*60*12),1));

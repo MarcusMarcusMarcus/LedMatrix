@@ -9,6 +9,13 @@ float AnimatedFloat::interpolate(const float &a,
     return a + (b-a) * fraction;
 }
 
+int AnimatedInt::interpolate(const int &a,
+                             const int &b,
+                             float fraction)
+{
+    return std::max(a,int(a + (b-a+1) * fraction));
+}
+
 QColor AnimatedColor::interpolate(const QColor &a, const QColor &b, float fraction)
 {
     return QColor(

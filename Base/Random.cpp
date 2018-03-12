@@ -12,6 +12,11 @@ int Random::getInt(int min, int max)
     return qrand() % (max-min+1) + min;
 }
 
+bool Random::getBool()
+{
+    return getInt(0,1) == 1;
+}
+
 QColor Random::getColor()
 {
     return QColor::fromRgb(getInt(10,255),getInt(10,255),getInt(10,255));

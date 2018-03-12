@@ -5,8 +5,10 @@
 class AnimatedPoint
 {
 public:
-    AnimatedPoint(QPointF from,QPointF to,
-                  float secondsX,float secondsY);
+    AnimatedPoint(QPointF from = QPointF(0,0),
+                  QPointF to = QPointF(0,0),
+                  float secondsX = 1,
+                  float secondsY = 1);
 
     QPointF value();
     QPointF value(float time);

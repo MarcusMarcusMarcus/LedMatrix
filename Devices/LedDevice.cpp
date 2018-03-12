@@ -14,17 +14,17 @@ LedDevice::LedDevice(int width, int height) :
     m_width(width),
     m_height(height)
 {
-    m_effects["clock"] = new Clock(this);
-    m_effects["balls"] = new Balls(this);
-    m_effects["snakes"] = new Snakes(this);
+    m_effects["balls"] = new Balls(this,width,height);
+    m_effects["snakes"] = new Snakes(this,width,height);
+    m_effects["clock"] = new Clock(this,width,height);
     for(auto name : m_effects.keys())
     {
         auto value = scriptEngine().newQObject(m_effects[name]);
         scriptEngine().globalObject().setProperty(name, value);
     }
-    m_effects["clock"]->setEnabled(true);
     m_effects["balls"]->setEnabled(false);
-    m_effects["snakes"]->setEnabled(false);
+    m_effects["snakes"]->setEnabled(true);
+    m_effects["clock"]->setEnabled(true);
 }
 
 LedDevice::~LedDevice()
@@ -134,7 +134,11 @@ void LedDevice::update()
     painter.setRenderHints(QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform|QPainter::Antialiasing);
     for(auto effect : m_effects)
         if (effect->isEnabled())
-            effect->paint(painter);
+        {
+            painter.setOpacity(effect->getOpacity());
+            painter.drawImage(0,0,effect->update());
+        }
+    painter.end();
 
     //  painter.setCompositionMode(QPainter::CompositionMode_Plus);
     //  test4(painter,width(),height());
